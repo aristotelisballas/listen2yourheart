@@ -1,0 +1,162 @@
+import os
+from shutil import rmtree
+
+import numpy as np
+import tensorflow as tf
+from sklearn.preprocessing import StandardScaler
+
+from helper_code import get_num_locations, load_patient_data, get_label
+
+
+def get_label_location(data):
+    label = None
+    for l in data.split('\n'):
+        if l.startswith('#Murmur locations:'):
+            try:
+                label = l.split(': ')[1]
+            except:
+                pass
+    if label is None:
+        raise ValueError('No label available. Is your code trying to load labels from the hidden data?')
+    return label
+
+
+def find_recording_files(data_folder, patient_files):
+    files = []
+    labels = []
+    for i in range(len(patient_files)):
+        data = load_patient_data(patient_files[i])
+        num_locations = get_num_locations(data)
+        recording_information = data.split('\n')[1:num_locations + 1]
+        label = get_label(data)
+        label_location = get_label_location(data)
+
+        for j in range(num_locations):
+            entries = recording_information[j].split(' ')
+            recording_file = entries[2]
+            location = entries[0]
+            filename = os.path.join(data_folder, recording_file)
+            if label == 'Present':
+                if location in label_location:
+                    labels.append(label)
+                else:
+                    labels.append('Absent')
+            else:
+                labels.append(label)
+            files.append(filename)
+    return files, labels
+
+
+def load_wav_file(filename, labels):
+    file = filename
+    raw_audio = tf.io.read_file(file)
+    waveform = tf.audio.decode_wav(raw_audio)
+    recording = waveform.audio
+    return recording, labels
+
+
+def split_recording(rec, label, wsize: int):
+    splits = []
+    split_labs = []
+    spoof = 0
+    for i in range(rec.shape[0] // wsize):
+        sig = rec[spoof:spoof + wsize]
+        splits.append(tf.reshape(sig, sig.shape[0]))
+        split_labs.append(label)
+        spoof += wsize
+
+    return splits, split_labs
+
+
+def calculate_predictions(model, data, recordings, wsize: int, positive_percentage: int):
+    labels = []
+    patient_recs = []
+    recording_predictions = []
+
+    for i in range(len(recordings)):
+        r = StandardScaler().fit_transform(recordings[i].reshape(-1, 1)).T
+        r = r.reshape(r.shape[1])
+        recordings[i] = r
+        labels.append('Unknown')
+
+    for recording, label in zip(recordings, labels):
+        recs, labs = split_recording(recording, label, wsize)
+        patient_recs.append(recs)
+
+    for splitted_rec in patient_recs:
+        recording_predictions.append(predict(model, splitted_rec, positive_percentage))
+
+    result = recording_predictions[get_max_value(recording_predictions, range(len(recording_predictions)))]
+
+    return result
+
+
+def predict(model, records, positive_percentage):
+    classes = ['Present', 'Unknown', 'Absent']
+    pred_labels = []
+    probabilities = []
+
+    for i in range(len(records)):
+        pred = model.predict(tf.expand_dims(records[i], 0))
+        pred_labels.append(classes[np.argmax(pred)])
+        probabilities.append(pred)
+
+    noof_positive = [i for i, x in enumerate(pred_labels) if x == "Present"]
+    noof_unknown = [i for i, x in enumerate(pred_labels) if x == "Unknown"]
+    noof_absent = [i for i, x in enumerate(pred_labels) if x == "Absent"]
+    n_total = len(records)
+
+    if len(noof_positive) > 0:
+        if (len(noof_positive) / n_total) > positive_percentage:
+            result = probabilities[get_max_value(probabilities, noof_positive)][0]
+        elif len(noof_unknown) > 0:
+            result = probabilities[get_max_value(probabilities, noof_unknown)][0]
+        else:
+            result = probabilities[get_min_value(probabilities, noof_absent, classes.index('Absent'))][0]
+    else:
+        if len(noof_unknown) > 0:
+            result = probabilities[get_max_value(probabilities, noof_unknown)][0]
+        else:
+            result = probabilities[get_max_value(probabilities, noof_absent)][0]
+            # result = get_average_value(probabilities, noof_absent)
+
+    return result
+
+
+def get_max_value(x, indices):
+    max_val = 0
+    position = 0
+
+    for i in indices:
+        val = np.max(x[i])
+        if val > max_val:
+            max_val = val
+            position = i
+
+    return position
+
+
+def get_min_value(x, indices, label_position: int):
+    x = np.vstack(np.array(x))
+    values = []
+    for i in range(len(indices)):
+        values.append(np.min(x[i, label_position]))
+
+    position = indices[np.argmin(values)]
+
+    return position
+
+
+def get_average_value(x, indices):
+    x = np.vstack(np.array(x))
+    values = []
+    for i in range(len(indices)):
+        values.append(x[i])
+    result = np.average(values, 0)
+
+    return result
+
+
+def remove_dir_if_exists(folder):
+    if os.path.exists(folder) and os.path.isdir(folder):
+        rmtree(folder)
