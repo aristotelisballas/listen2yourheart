@@ -33,12 +33,12 @@ augmentations = {
                      'uniformnoise_-0.01_0.01',
                      'uniformnoise_-0.1_0.1'],
 
-    # 'randomresample': ['randomresample_0.1', 'randomresample_0.3', 'randomresample_0.5',
-    #                    'randomresample_0.7', 'randomresample_0.9']
+    'randomresample': ['randomresample_0.1', 'randomresample_0.3', 'randomresample_0.5',
+                       'randomresample_0.7', 'randomresample_0.9'],
 
 }
 
-backbones = ['cnn']  # maybe add 'vgg16'
+backbones = ['cnn']  
 
 
 flags.DEFINE_string('export_dir',
