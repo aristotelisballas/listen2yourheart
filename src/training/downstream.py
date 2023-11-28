@@ -48,7 +48,7 @@ flags.DEFINE_string(
 )
 
 flags.DEFINE_integer('random_state', 42,
-                     'Random Seed for splitting data', 0)
+                     'Random Seed for splitting data', required=True)
 
 
 FLAGS = flags.FLAGS
@@ -206,7 +206,7 @@ def train_downstream(
             print(f'Found {len(total_ood_windows)} OOD windows in total.')
 
             # split windows into train, val and test
-            _, _, test_w_ood = split_windows_in_three(total_ood_windows)
+            _, _, test_w_ood = split_windows_in_three(total_ood_windows, random_state=_random_state)
 
             wl_ood = WindowListsSequence(test_w_ood, _batch_size)
             ds_ood, ds_ood_info = build_window_lists_dataset(wl_ood)

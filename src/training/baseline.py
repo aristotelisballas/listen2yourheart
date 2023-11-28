@@ -1,7 +1,7 @@
 import os
 import sys
 
-sys.path.append('/home/aballas/git/listen2yourheart/src')
+sys.path.append('/home/aballas/git/pcg-ssl/src')
 print(os.getcwd())
 
 from pathlib import Path
@@ -43,6 +43,9 @@ flags.DEFINE_string(
     'conf_path', None, "The path of the configuration yaml file", required=True
 )
 
+flags.DEFINE_integer('random_state', 42,
+                     'Random Seed for splitting data', required=True)
+
 FLAGS = flags.FLAGS
 
 
@@ -63,11 +66,10 @@ def train_downstream(
     _augmentations = [ssl['augmentation1'], ssl['augmentation2']]
     _batch_size = downstream['batch_size']
     _classes = get_label_len(config, datasets, downstream_type=label_type)
+    _random_state = FLAGS.random_state
 
     # Load pcg windows and datasets
-    ood_datasets = downstream['ood']
     total_windows = []
-    total_ood_windows = []
 
     for ds in datasets:
         # Get LabelType for each separate dataset
@@ -83,22 +85,14 @@ def train_downstream(
         print(f'Found {len(total_windows)} in total.')
 
     # split windows into train, val and test
-    train_w, val_w, test_w = split_windows_in_three(total_windows)
+    train_w, val_w, test_w = split_windows_in_three(total_windows, random_state=_random_state)
 
     wl_train = WindowListsSequence(train_w, _batch_size)
     wl_val = WindowListsSequence(val_w, _batch_size)
     wl_test = WindowListsSequence(test_w, _batch_size)
 
-    # Create augmentors
-    augmentor = LeAugmentor(_augmentations[1])
-    print(augmentor)
-
-    # Build TF Datasets  # TODO choose between single or dual augmentation
-    if _augment:
-        ds_train, ds_train_info = build_window_lists_dataset(wl_train, augmentor)  # Single augmentation
-        # ds_train, ds_train_info = build_window_lists_dataset(wl_train, dual_augmentor)  # Dual augmentation
-    else:
-        ds_train, ds_train_info = build_window_lists_dataset(wl_train)  # No augmentation
+    # Build TF Datasets
+    ds_train, ds_train_info = build_window_lists_dataset(wl_train)  # No augmentation
 
     ds_val, ds_val_info = build_window_lists_dataset(wl_val)
     ds_test, ds_test_info = build_window_lists_dataset(wl_test)
@@ -121,14 +115,6 @@ def train_downstream(
 
     model: Model = create_model(wl_train.__getitem__(0)[0][0].shape, ssl['backbone'], config)
 
-    # ssl_weights_path = _ssl_model_path(ssl_path)
-
-    # Load Backbone model weights
-    # model_ssl.load_weights(ssl_weights_path)
-
-    # Freeze the layers of the pretrained backbone model
-    # if downstream['freeze']:
-    #     model = set_ts_mode(model)
 
     # Create and Compile Downstream Task Model
     model_ts = create_extended_model(model, classification_head, 1, "model_downstream")
@@ -180,6 +166,7 @@ def train_downstream(
     if label_type == 'binary':
         for ood_dataset in ood_dataset_pairs[dataset]:
             total_ood_windows = []
+            print(f"Starting loading ODD. Length: {len(total_ood_windows)}")
             l_type = get_label_type(config, ood_dataset, downstream_type='binary')
             if ood_dataset == 'pascal':
                 total_ood_windows += create_pascal_window_lists(config, l_type)
@@ -191,7 +178,10 @@ def train_downstream(
                 raise NotImplementedError(f'{ood_dataset} dataset not supported!')
             print(f'Found {len(total_ood_windows)} OOD windows in total.')
 
-            wl_ood = WindowListsSequence(total_ood_windows, _batch_size)
+            # split windows into train, val and test
+            _, _, test_w_ood = split_windows_in_three(total_ood_windows, random_state=_random_state)
+
+            wl_ood = WindowListsSequence(test_w_ood, _batch_size)
             ds_ood, ds_ood_info = build_window_lists_dataset(wl_ood)
 
             cmatrix_ood, metrics_ood, eval_hist_ood = evaluate_model_and_metrics(model_ts, ds_ood,
@@ -216,7 +206,7 @@ def train_downstream(
                 ood_dataset=ood_dataset
             )
     else:
-        metrics_ood = cmatrix_ood = None
+        metrics_ood = None
 
         print('Saving entry to CSV file')
         entry = save_log_entry(
@@ -275,20 +265,21 @@ def main(args):
     # Instantiate Configuration class that reads the specified
     # YAML file and returns several dict objects
     conf_path = Path(FLAGS.conf_path)
-    config = Configuration(FLAGS.conf_path)
+    config = Configuration(conf_path)
 
     # ssl_path: Path = Path(FLAGS.ssl_path)
     ds_path: Path = Path(FLAGS.ds_path)
 
-    # Run downstream training
-    # train_downstream(
-    #     config=config, ds_path=ds_path, conf_path=conf_path
-    # )
+    # Run downstream training for baseline
     for dataset in config.downstream['datasets']:
         for label_type in ['all', 'binary']:
-            train_downstream(
-                config=config, ds_path=ds_path, conf_path=conf_path,
-                dataset=dataset, label_type=label_type)
+            if dataset == 'physionet2016' and label_type == 'all':
+                continue
+            else:
+                print(f"Training on: {dataset}, {label_type}")
+                train_downstream(
+                    config=config, ds_path=ds_path, conf_path=conf_path,
+                    dataset=dataset, label_type=label_type)
 
 
 if __name__ == '__main__':
