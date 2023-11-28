@@ -169,7 +169,7 @@ yml.
 The implemented neural network adopted in our research is a 5-layer
 1D CNN, illustrated in the below figure.
 
-![title](./assets/architecture_hor.png)
+<img src="./assets/architecture_hor.png" alt="drawing" width="600"/>
 
 However, you can of course consider using a different or novel 
 architecture for the same task. 
