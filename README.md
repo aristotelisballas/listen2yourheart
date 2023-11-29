@@ -5,7 +5,7 @@
 > paper which has been submitted for publication.
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
-for future research.
+for research purposes.
 
 
 An overview of the proposed training and evaluation protocol is depicted 
