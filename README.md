@@ -2,7 +2,7 @@
 
 > This is the official code for the "On the Out-Of-Distribution Robustness of 
 > Self-Supervised Representation Learning for Phonocardiogram Signals"
-> paper which has been submitted for publication.
+> preprint paper which has been submitted for publication.
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
 for research purposes.
