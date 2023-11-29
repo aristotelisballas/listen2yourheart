@@ -1,7 +1,7 @@
 # Welcome to Listen2YourHeart
 
-> This is the official code for the "A Comprehensive Evaluation of Augmentations 
-> for Robust Self-Supervised Contrastive Phonocardiogram Representation Learning"
+> This is the official code for the "On the Out-Of-Distribution Robustness of 
+> Self-Supervised Representation Learning for Phonocardiogram Signals"
 > paper.
 
 
@@ -79,7 +79,7 @@ To do that, edit the configuration file --> `./src/configuration/config.yml`
 
 
 ### 3. Fully-Supervised Model
-To train the fully supervised CNN run the following:
+To train a fully supervised CNN, run the following:
 
 - <u>SLURM</u>
   ```console
@@ -157,7 +157,7 @@ All implemented augmentations and transformations are located in:
 `./src/augmentations/augmentations.py`
 
 By creating the appropriate python class, one can develop novel (or 
-known augmentations which were not implemented) transformations and 
+known augmentations which have not yet been implemented) transformations and 
 apply them during SSL pretraining.
 
 Once developed, the `_create_augmentors` function in 
@@ -179,14 +179,14 @@ All models are specified in the `./src/models/` directory.
 
 
 ### Loss Function
-Finally, in our paper we chose to implement the contrastive loss 
+Finally, in our paper we chose to implement the `NT-XENT` contrastive loss 
 introduced in the [SimCLR](https://github.com/google-research/simclr) 
-framework, which is the following:
+framework::
 
 ![title](./assets/simclr%20loss.png)
 
-You can of course change this losss and experiment with different 
-contrastive-based losses.
+You can of course select to change it and experiment with 
+different contrastive-based losses.
 
 
 
