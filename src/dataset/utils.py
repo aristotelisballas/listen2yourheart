@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -286,7 +288,10 @@ def save_log_entry(config,
 
     df = pd.DataFrame(df_dict, index=[0])
 
-    df.to_csv(results_path, mode='a', index=False, header=False)
+    if not os.path.isfile(results_path):
+        df.to_csv('filename.csv', header='column_names')
+    else: # else it exists so append without writing the header
+        df.to_csv(results_path, mode='a', index=False, header=False)
 
     return df_dict
 

@@ -12,10 +12,6 @@ in the below image:
 <img src="./assets/framework.png" alt="drawing" width="600"/>
 
 
-
-****If not obvious, name inspiration explained [here](https://www.youtube.com/watch?v=yCC_b5WHLX0&themeRefresh=1).*
-
-
 Listen2YourHeart is an IntelliJ project. The root folder (the one where this file is)
 contains two main directories. The `scripts` dir holds all necessary scripts 
 for a) downloading all data used in this project (`scripts\datasets`) and b) the 
@@ -23,6 +19,8 @@ source code for submitting pretraining and fine-tuning jobs to a
 [SLURM](https://slurm.schedmd.com/documentation.html) workload manager. 
 As it names suggests, the `src` dir contains the source code for everything mentioned
 in our paper.
+
+****If not obvious, repo name and [previous work](https://ieeexplore.ieee.org/abstract/document/10081680) inspiration explained [here](https://www.youtube.com/watch?v=yCC_b5WHLX0&themeRefresh=1).*
 
 
 ## Project Structure
@@ -88,12 +86,12 @@ To train a fully supervised CNN, run the following:
 
 - <u>Python</u>
   ```
-  python -m src.training.pretrain --ds_path "{path_to_save_model}" --conf_path "./src/configuration/config.yml" --random_seed {seed}
+  python -m src.training.pretrain --ds_path "{path_to_save_model}" --conf_path "./src/configuration/config.yml"
   ```
 
 
 ### 4. Contrastive Self-Supervised Models
-To train the proposed model via SSL, you once again need to specify the necessary
+To train the proposed model via SSL, you once again need to specify all necessary
 parameters in the configuration file (`./src/configuration/config.yml`).
 
 The most important parameters are the 2 augmentation combinations, specified by the
@@ -137,8 +135,7 @@ may run the following:
   --initial_epoch 0 /
   --ssl_job_epochs 200 /
   --ssl_total_epochs 200 /
-  --conf_path {conf_path} /
-  --random_seed {seed}
+  --conf_path {conf_path}
   ```
 
 ### 5. Results

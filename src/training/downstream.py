@@ -47,9 +47,6 @@ flags.DEFINE_string(
     'conf_path', None, "The path of the configuration yaml file", required=True
 )
 
-flags.DEFINE_integer('random_state', 42,
-                     'Random Seed for splitting data', required=True)
-
 
 FLAGS = flags.FLAGS
 
@@ -68,7 +65,7 @@ def train_downstream(
     _augment = downstream['augment']
     _augmentations = [ssl['augmentation1'], ssl['augmentation2']]
     _batch_size = downstream['batch_size']
-    _random_state = FLAGS.random_state
+    _random_state = common['random_seed']
 
     # Load pcg windows and datasets
     # datasets = downstream['datasets']

@@ -54,8 +54,6 @@ flags.DEFINE_integer('ssl_total_epochs', 0,
 flags.DEFINE_integer('initial_epoch', 0,
                      'Initial epoch of model training', 0)
 
-flags.DEFINE_integer('random_state', 42,
-                     'Random Seed for splitting data', 0)
 
 # flags.DEFINE_integer('complete', 0,
 #                      'If ssl training is complete or not', 0,
@@ -75,7 +73,7 @@ def pretrain(config: Configuration, tmp_path: Path = None,
     # Common variables
     _augmentations = [ssl['augmentation1'], ssl['augmentation2']]
     _batch_size = ssl['batch_size']
-    _random_state = FLAGS.random_state
+    _random_state = common['random_seed']
 
     # Load pcg windows and datasets
     datasets = ssl['datasets']
