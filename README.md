@@ -209,7 +209,8 @@ This repo is an extension of our initial work in "[Listen2YourHeart: A Self-Supe
   volume={498},
   number={},
   pages={1-4},
-  doi={10.22489/CinC.2022.298}}
+  doi={10.22489/CinC.2022.298}
+  }
 
 ```
 
