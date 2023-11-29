@@ -78,8 +78,8 @@ fine-tuning experiments.
 To do that, edit the configuration file --> `./src/configuration/config.yml`
 
 
-### 3. Baseline
-To train the fully supervised baseline run the following:
+### 3. Fully-Supervised Model
+To train the fully supervised CNN run the following:
 
 - <u>SLURM</u>
   ```console
@@ -88,7 +88,7 @@ To train the fully supervised baseline run the following:
 
 - <u>Python</u>
   ```
-  python -m src.training.pretrain --ds_path "{path_to_save_model}" --conf_path "./src/configuration/config.yml"
+  python -m src.training.pretrain --ds_path "{path_to_save_model}" --conf_path "./src/configuration/config.yml" --random_seed {seed}
   ```
 
 
@@ -137,7 +137,8 @@ may run the following:
   --initial_epoch 0 /
   --ssl_job_epochs 200 /
   --ssl_total_epochs 200 /
-  --conf_path {conf_path}
+  --conf_path {conf_path} /
+  --random_seed {seed}
   ```
 
 ### 5. Results
