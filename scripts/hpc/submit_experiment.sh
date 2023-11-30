@@ -22,8 +22,8 @@
 if [ -z $1 ]; then
   echo "Please specify experiment name and config.yml. With that order."
 else
-  N_STEPS=5
-  EPOCHS_PER_STEP=40
+  N_STEPS=2
+  EPOCHS_PER_STEP=100
   SSL_TOTAL_EPOCHS=200  ### MUST BE N_STEPS x EPOCHS_PER_STEO
   let FINAL_STEP=$N_STEPS-1
   EXP_NAME="$1"

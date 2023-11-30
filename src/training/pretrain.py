@@ -68,6 +68,7 @@ def pretrain(config: Configuration, tmp_path: Path = None,
              ssl_total_epochs: int = 0):
 
     # Load config settings
+    common = config.common
     ssl = config.ssl
 
     # Common variables

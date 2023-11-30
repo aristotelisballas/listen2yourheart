@@ -269,6 +269,15 @@ def _ds_model_path(tmp_path: Path, dataset: str, label_type: str) -> Path:
     return ds_model_path
 
 
+def _ssl_model_path(tmp_path: Path) -> Path:
+    ssl_model_path: Path = tmp_path / 'ssl_weights' / 'pretrained_model'
+    Path.mkdir(ssl_model_path, parents=True, exist_ok=True)
+    print("SSL model path: " + str(ssl_model_path))
+    ssl_model_path: Path = tmp_path / 'ssl_weights' / 'pretrained_model' / 'final'
+
+    return ssl_model_path
+
+
 def main(args):
     del args
 

@@ -1,7 +1,7 @@
 import os
 import sys
 
-sys.path.append('/home/aballas/git/pcg-ssl/src')
+sys.path.append('/home/aballas/git/listen2yourheart/src')
 print(os.getcwd())
 
 from pathlib import Path
