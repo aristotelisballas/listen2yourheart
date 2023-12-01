@@ -27,7 +27,7 @@ in our paper.
 ****If not obvious, repo name and [previous work](https://ieeexplore.ieee.org/abstract/document/10081680) inspiration explained [here](https://www.youtube.com/watch?v=yCC_b5WHLX0&themeRefresh=1).*
 
 
-## Project Structure
+## <u>Project Structure</u>
 
 * `scripts`: directory containing scripts for downloading datasets and submitting SLURM jobs.
 * `src`: directory containing source code of project
@@ -39,7 +39,7 @@ appropriate package dependecies.
 * `README.md`: this file.
 
 
-## Datasets
+## <u>Datasets</u>
 The datasets used in this project are:
 * [FPCGDB](https://physionet.org/content/fpcgdb/1.0.0/): Fetal PCG Database
 * [EPHNOGRAM](https://physionet.org/content/ephnogram/1.0.0/): A Simultaneous Electrocardiogram and Phonocardiogram Database
@@ -92,7 +92,6 @@ To train a fully supervised CNN, run the following:
   ```
   python -m src.training.pretrain --ds_path "{path_to_save_model}" --conf_path "./src/configuration/config.yml"
   ```
-
 
 ### 4. Contrastive Self-Supervised Models
 To train the proposed model via SSL, you once again need to specify all necessary
