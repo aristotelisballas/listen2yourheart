@@ -55,10 +55,6 @@ flags.DEFINE_integer('initial_epoch', 0,
                      'Initial epoch of model training', 0)
 
 
-# flags.DEFINE_integer('complete', 0,
-#                      'If ssl training is complete or not', 0,
-#                      required=True)
-
 FLAGS = flags.FLAGS
 
 
@@ -119,9 +115,6 @@ def pretrain(config: Configuration, tmp_path: Path = None,
                                 int(0.1 * ssl_total_epochs),
                                 ssl['warmup_scaling'], 0.01,
                                 initial_epoch)
-
-    # for i in range(ssl_job_epochs):
-    #     tf.print(lr(i * ds_train_info.num_batches))
 
     optimizer = LARS(lr, weight_decay_rate=1e-4)
 

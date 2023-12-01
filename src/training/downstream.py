@@ -68,11 +68,9 @@ def train_downstream(
     _random_state = common['random_seed']
 
     # Load pcg windows and datasets
-    # datasets = downstream['datasets']
     datasets = [dataset]
     _classes = get_label_len(config, datasets, downstream_type=label_type)
 
-    ood_datasets = downstream['ood']
     total_windows = []
 
     for ds in datasets:
@@ -80,8 +78,6 @@ def train_downstream(
         l_type = get_label_type(config, ds, downstream_type=label_type)
         if ds == 'pascal':
             total_windows += create_pascal_window_lists(config, l_type)
-        # elif dataset == 'ephnogram':
-        #     total_windows += create_ephnogram_window_lists(config)
         elif ds == 'physionet2016':
             total_windows += create_physionet2016_window_lists(config, l_type)
         elif ds == 'physionet2022':

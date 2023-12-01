@@ -165,6 +165,26 @@ Once developed, the `_create_augmentors` function in
 the new transformation class and specification in the configuration .
 yml.
 
+- ### Additonal Data
+By creating an additional directory in `./src/datasets/` and developing the
+appropriate functions, you can add additional datasets for model training 
+or evaluation.
+
+For _unlabelled_ dataset loading, you can refer to the structure of 
+`./src/datasets/fpcgdb/fpcgdb.py` or `./src/datasets/ephnogram/ephnogram.py`. 
+For _labeled_ datasets refer to the structure of one of the `pascal`, 
+`physionet2016challenge` or `physionet2022challenge` directories and scripts.
+
+The basic idea is that you load the signals as numpy arrays, which are then 
+preproceesed and split into windows. These windows are then utilized to create
+`tf.data.Dataset` objects, that are finally fed to the model during training.
+
+- ### Different 1D Signal Types - Transfer Learning
+The `Listen2YourHeart` framework can also be utilized for training SSL models on
+different 1D signals (e.g ECG, EEG, EDA, etc). You can alter the dataloaders for the different datasets
+and use the same pipelines for SSL model training or evaluation.
+
+
 
 - ### Model Development
 The implemented neural network adopted in our research is a 5-layer

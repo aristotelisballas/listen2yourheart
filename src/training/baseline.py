@@ -2,7 +2,6 @@ import os
 import sys
 
 sys.path.append('/home/aballas/git/listen2yourheart/src')
-print(os.getcwd())
 
 from pathlib import Path
 from shutil import copy
@@ -19,7 +18,6 @@ from keras.metrics import CategoricalAccuracy, BinaryAccuracy
 from keras.optimizers import Adam
 from keras.engine.base_layer import Layer
 
-from augmentations.generics import LeAugmentor, LeDualAugmentor
 from configuration.configuration import Configuration
 from dataset.builder import build_window_lists_dataset
 from dataset.common import ood_dataset_pairs
@@ -183,7 +181,6 @@ def train_downstream(
             cmatrix_ood, metrics_ood, eval_hist_ood = evaluate_model_and_metrics(model_ts, ds_ood,
                                                                                  ds_ood_info, 2)
 
-            # metrics_ood['accuracy'] = eval_hist_ood['accuracy']
             metrics_ood['loss'] = eval_hist_ood['loss']
 
             print(f"OOD Confusion Matrix for {ood_dataset}\n:")
@@ -263,7 +260,6 @@ def main(args):
     conf_path = Path(FLAGS.conf_path)
     config = Configuration(conf_path)
 
-    # ssl_path: Path = Path(FLAGS.ssl_path)
     ds_path: Path = Path(FLAGS.ds_path)
 
     # Run downstream training for baseline
