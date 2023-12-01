@@ -289,7 +289,7 @@ def save_log_entry(config,
     df = pd.DataFrame(df_dict, index=[0])
 
     if not os.path.isfile(results_path):
-        df.to_csv('filename.csv', header='column_names')
+        df.to_csv(results_path, header='column_names')
     else: # else it exists so append without writing the header
         df.to_csv(results_path, mode='a', index=False, header=False)
 

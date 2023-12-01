@@ -1,3 +1,7 @@
+# These numbers were taken from random.org and they
+# come from atmospheric noise, which for many purposes is better than the
+# pseudo-random number algorithms typically used in computer programs.
+
 187372311
 204110176
 129995678

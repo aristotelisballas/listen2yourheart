@@ -1,4 +1,4 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # Welcome to Listen2YourHeart
 
@@ -7,8 +7,7 @@
 > preprint paper which has been submitted for publication.
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
-for research purposes.
-
+as is, for research purposes.
 
 An overview of the proposed training and evaluation protocol is depicted 
 in the below image:
@@ -50,7 +49,7 @@ Cardiology Challenge 2016
 * [PhysioNet2022](https://moody-challenge.physionet.org/2022/): Heart Murmur Detection from Phonocardiogram Recordings: The George B. 
 Moody PhysioNet Challenge 2022
 
-## Quick Start
+## <u>Quick Start</u>
 ### 1. Download data
 The first thing to do is download all necessary data.
 To dowload each dataset you can run the following scripts and
@@ -135,7 +134,7 @@ may run the following:
   # Run single experiment with single config file
   # All arguments explained in pretrain.py
   
-  python3 -m listen2yourheart.src.new_training.pretrain /
+  python3 -m listen2yourheart.src.training.pretrain /
   --tmp_path {tmp_path} /
   --initial_epoch 0 /
   --ssl_job_epochs 200 /
@@ -147,14 +146,14 @@ may run the following:
 All results will be available in a .csv file, which is specified in the `[results]` key of the configuration .yml.
 
 
-## Framework Extension Ideas
+## <u>Framework Extension Ideas</u>
 Our codebase presents future researchers and practioners with the
 opportunity to extend our initial findings towards the development 
 of novel approaches and methods.
 
 Specifically, some initial thoughts on the above are the following.
 
-### Augmentation Development
+- ### Augmentation Development
 All implemented augmentations and transformations are located in:
 `./src/augmentations/augmentations.py`
 
@@ -168,7 +167,7 @@ the new transformation class and specification in the configuration .
 yml.
 
 
-### Model Development
+- ### Model Development
 The implemented neural network adopted in our research is a 5-layer
 1D CNN, illustrated in the below figure.
 
@@ -180,7 +179,7 @@ architecture for the same task.
 All models are specified in the `./src/models/` directory.
 
 
-### Loss Function
+- ### Loss Function
 Finally, in our paper we chose to implement the `NT-XENT` contrastive loss 
 introduced in the [SimCLR](https://github.com/google-research/simclr) 
 framework::
@@ -193,15 +192,14 @@ different contrastive-based losses.
 
 
 
-## References
+## <u>References</u>
 
-If you use the above code for your research please cite our paper, which
+If you use the above code for your research please consider citing our paper, which
 is currently under review at [IEEE Transactions on Biomedical Engineering](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10):
 
 ```citation
 Will upload ArXiv paper citation when available.
 ```
-
 
 This repo is an extension of our initial work in "[Listen2YourHeart: A Self-Supervised Approach for Detecting Murmur in Heart-Beat Sounds](https://ieeexplore.ieee.org/abstract/document/10081680)".
 
@@ -216,8 +214,7 @@ This repo is an extension of our initial work in "[Listen2YourHeart: A Self-Supe
   pages={1-4},
   doi={10.22489/CinC.2022.298}
   }
-
 ```
 
-## License
+## <u>License</u>
 This source code is released under the MIT license.
