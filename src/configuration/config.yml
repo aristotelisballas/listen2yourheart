@@ -5,7 +5,7 @@ common:
   wstep_sec: 2.5
   audio_crop_sec: 2.0
   DEBUG: False
-  random_seed: 0
+  random_seed: 42
 
 downstream:
   type: all       # either "all" or "binary"
