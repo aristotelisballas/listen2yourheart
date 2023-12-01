@@ -213,8 +213,10 @@ different contrastive-based losses.
 
 ## <u>References</u>
 
-If you use the above code for your research please consider citing our paper, which
-is currently under review at [IEEE Transactions on Biomedical Engineering](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10):
+If you use the above code for your research please cite our papers: 
+
+"[On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals](https://arxiv.org/search/?searchtype=author&query=Ballas%2C+A)", 
+under review at [IEEE Transactions on Biomedical Engineering](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10):
 
 ```citation
 Will upload ArXiv paper citation when available.
