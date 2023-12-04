@@ -1,0 +1,63 @@
+common:
+  allow_snapshots: False
+  audio_fs: 2000
+  wsize_sec: 5.0
+  wstep_sec: 2.5
+  audio_crop_sec: 2.0
+  DEBUG: False
+  random_seed: 42
+
+downstream:
+  type: all       # either "all" or "binary"
+  datasets:
+    - pascal
+    - physionet2016
+    - physionet2022
+  epochs: 100
+  batch_size: 32
+  patience: 10
+  lr: 0.0001
+  freeze: True
+  augment: True
+  # class_weights expects 3 ints -> [5, 3, 1] or None
+  class_weights:
+  tensorboard: False
+  ood:
+#    - physionet2016
+
+model_load_asset: False
+
+ssl:
+  datasets:
+    - 'fpcgdb'
+    - 'ephnogram'
+    - 'pascal'
+    - 'physionet2016'
+    - 'physionet2022'
+  tensorboard: True
+#  epochs: 50
+  batch_size: 128
+  patience: 10
+  backbone: cnn
+  temperature: 0.1
+  warmup_scaling: linear
+  base_learning_rate: 0.1
+  offset: 0.0
+  # Leave blank for None
+  augmentation1:
+    - fliplr
+    - cutofffilter_250_200_2000
+    - randomscaling_0.5_2.0
+  augmentation2:
+    - uniformnoise_-0.01_0.01
+    - flipud
+    - fliprandom_0.3
+
+paths:
+  ephnogram: /home/aballas/datasets/pcg/ephnogram
+  fpcgdb: /home/aballas/datasets/pcg/fpcgdb
+  pascal: /home/aballas/datasets/pcg/pascal
+  physionet2016: /home/aballas/datasets/pcg/physionet2016challenge
+  physionet2022: /home/aballas/datasets/pcg/physionet2022challenge
+  sufhsdb: /home/aballas/datasets/pcg/sufhsdb
+  results: /home/aballas/experiments/PCG/total_pcg_results.csv
