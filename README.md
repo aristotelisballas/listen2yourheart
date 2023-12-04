@@ -34,7 +34,7 @@ in our paper.
 * `requirements.txt`: a simple requirements file that is used to re-create the environment
   of the project.
 * `generate-requirements.sh`: convenience script for generating requirements and 
-appropriate package dependecies.
+appropriate package dependencies.
 * `pcg-ssl.iml`: the project file for IntelliJ.
 * `README.md`: this file.
 
