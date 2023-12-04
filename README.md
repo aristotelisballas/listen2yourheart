@@ -215,11 +215,18 @@ different contrastive-based losses.
 
 If you use the above code for your research please cite our papers: 
 
-"[On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals](https://arxiv.org/search/?searchtype=author&query=Ballas%2C+A)", 
+"[On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals](https://arxiv.org/abs/2312.00502)", 
 under review at [IEEE Transactions on Biomedical Engineering](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10):
 
 ```citation
-Will upload ArXiv paper citation when available.
+@misc{ballas2023outofdistribution,
+      title={On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals}, 
+      author={Aristotelis Ballas and Vasileios Papapanagiotou and Christos Diou},
+      year={2023},
+      eprint={2312.00502},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
 ```
 
 This repo is an extension of our initial work in "[Listen2YourHeart: A Self-Supervised Approach for Detecting Murmur in Heart-Beat Sounds](https://ieeexplore.ieee.org/abstract/document/10081680)".
