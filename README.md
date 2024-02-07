@@ -52,7 +52,7 @@ Moody PhysioNet Challenge 2022
 ## <u>Quick Start</u>
 ### 1. Download data
 The first thing to do is download all necessary data.
-To dowload each dataset you can run the following scripts and
+To download each dataset you can run the following scripts and
 commands from a terminal:
 
 ```console
