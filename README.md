@@ -215,8 +215,8 @@ different contrastive-based losses.
 
 If you use the above code for your research please cite our papers: 
 
-"[On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals](https://arxiv.org/abs/2312.00502)", 
-under review at [IEEE Transactions on Biomedical Engineering](https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=10):
+"[On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals](https://arxiv.org/abs/2312.00502)", currently 
+under review.
 
 ```citation
 @misc{ballas2023outofdistribution,
