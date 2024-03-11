@@ -2,9 +2,8 @@
 
 # Welcome to Listen2YourHeart
 
-> This is the official code for the "On the Out-Of-Distribution Robustness of 
-> Self-Supervised Representation Learning for Phonocardiogram Signals"
-> preprint paper which has been submitted for publication.
+This is the official code for the "On the Out-Of-Distribution Robustness of 
+Self-Supervised Representation Learning for Phonocardiogram Signals" [preprint paper](https://arxiv.org/abs/2312.00502) which has been submitted for publication.
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
 as is, for research purposes.
