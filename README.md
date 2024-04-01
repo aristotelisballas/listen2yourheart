@@ -2,8 +2,7 @@
 
 # Welcome to Listen2YourHeart
 
-This is the official code for the "On the Out-Of-Distribution Robustness of 
-Self-Supervised Representation Learning for Phonocardiogram Signals" [preprint paper](https://arxiv.org/abs/2312.00502) which has been submitted for publication.
+This is the official code for the "A Comprehensive Evaluation of Augmentations for Robust OOD Self-Supervised Contrastive Phonocardiogram Representation Learning" [preprint paper](https://arxiv.org/abs/2312.00502) which has been submitted for publication.
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
 as is, for research purposes.
@@ -214,7 +213,7 @@ different contrastive-based losses.
 
 If you use the above code for your research please cite our papers: 
 
-"[On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals](https://arxiv.org/abs/2312.00502)", currently 
+"[A Comprehensive Evaluation of Augmentations for Robust OOD Self-Supervised Contrastive Phonocardiogram Representation Learning](https://arxiv.org/abs/2312.00502)", currently 
 under review.
 
 ```citation
