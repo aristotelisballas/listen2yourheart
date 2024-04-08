@@ -2,7 +2,7 @@
 
 # Welcome to Listen2YourHeart
 
-This is the official code for the "A Comprehensive Evaluation of Augmentations for Robust OOD Self-Supervised Contrastive Phonocardiogram Representation Learning" [preprint paper](https://arxiv.org/abs/2312.00502) which has been submitted for publication.
+This is the official code for the "Which Augmentation Should I Use? An Empirical Investigation of Augmentations for Self-Supervised Phonocardiogram Representation Learning" [preprint paper](https://arxiv.org/abs/2312.00502) which has been submitted for publication.
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
 as is, for research purposes.
@@ -213,7 +213,7 @@ different contrastive-based losses.
 
 If you use the above code for your research please cite our papers: 
 
-"[A Comprehensive Evaluation of Augmentations for Robust OOD Self-Supervised Contrastive Phonocardiogram Representation Learning](https://arxiv.org/abs/2312.00502)", currently 
+"[Which Augmentation Should I Use? An Empirical Investigation of Augmentations for Self-Supervised Phonocardiogram Representation Learning](https://arxiv.org/abs/2312.00502)", currently 
 under review.
 
 ```citation
