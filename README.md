@@ -2,7 +2,7 @@
 
 # Welcome to Listen2YourHeart
 
-This is the official code for the "Which Augmentation Should I Use? An Empirical Investigation of Augmentations for Self-Supervised Phonocardiogram Representation Learning" [preprint paper](https://arxiv.org/abs/2312.00502) which has been submitted for publication.
+This is the official code for the "Which Augmentation Should I Use? An Empirical Investigation of Augmentations for Self-Supervised Phonocardiogram Representation Learning", accepted in [IEEE Access](https://ieeexplore.ieee.org/abstract/document/10804781).
 
 Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
 as is, for research purposes.
@@ -217,14 +217,16 @@ If you use the above code for your research please cite our papers:
 under review.
 
 ```citation
-@misc{ballas2023outofdistribution,
-      title={On the Out-Of-Distribution Robustness of Self-Supervised Representation Learning for Phonocardiogram Signals}, 
-      author={Aristotelis Ballas and Vasileios Papapanagiotou and Christos Diou},
-      year={2023},
-      eprint={2312.00502},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
-}
+@ARTICLE{10804781,
+  author={Ballas, Aristotelis and Papapanagiotou, Vasileios and Diou, Christos},
+  journal={IEEE Access}, 
+  title={Which Augmentation Should I Use? An Empirical Investigation of Augmentations for Self-Supervised Phonocardiogram Representation Learning}, 
+  year={2024},
+  volume={12},
+  number={},
+  pages={193459-193472},
+  keywords={Brain modeling;Phonocardiography;Biological system modeling;Training;Data models;Electrocardiography;Electroencephalography;Feature extraction;Robustness;Representation learning;Contrastive learning;deep learning;OOD representation learning;phonocardiogram classification;self-supervised learning},
+  doi={10.1109/ACCESS.2024.3519297}}
 ```
 
 This repo is an extension of our initial work in "[Listen2YourHeart: A Self-Supervised Approach for Detecting Murmur in Heart-Beat Sounds](https://ieeexplore.ieee.org/abstract/document/10081680)".
