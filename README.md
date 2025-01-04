@@ -4,8 +4,6 @@
 
 This is the official code for the "Which Augmentation Should I Use? An Empirical Investigation of Augmentations for Self-Supervised Phonocardiogram Representation Learning", accepted in [IEEE Access](https://ieeexplore.ieee.org/abstract/document/10804781).
 
-Note: Repo might change in the future based on revisions and comments but can nevertheless be utilized
-as is, for research purposes.
 
 An overview of the proposed training and evaluation protocol is depicted 
 in the below image:
